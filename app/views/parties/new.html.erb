@@ -1,0 +1,29 @@
+<h1>Create New Party</h1>
+
+<%= form_with(model: @party, style: "max-width: 600px;") do |form| %>
+  <div style="display: flex; align-items: center; margin-bottom: 15px;">
+    <label style="min-width: 140px; font-weight: bold; margin-right: 10px;">
+      Party Name <span style="color: red;">*</span>
+    </label>
+    <%= form.text_field :title, required: true, style: "width: 300px; padding: 2px; border: 1px solid #ddd; border-radius: 4px;" %>
+  </div>
+
+  <div style="display: flex; align-items: center; margin-bottom: 15px;">
+    <label style="min-width: 140px; font-weight: bold; margin-right: 10px;">
+      Date and Time <span style="color: red;">*</span>
+    </label>
+    <%= form.datetime_field :date_time, required: true, style: "width: 300px; padding: 2px; border: 1px solid #ddd; border-radius: 4px;" %>
+  </div>
+
+  <div style="display: flex; align-items: flex-start; margin-bottom: 15px;">
+    <label style="min-width: 140px; font-weight: bold; margin-right: 10px;">
+      Description
+    </label>
+    <%= form.text_area :description, rows: 3, style: "width: 300px; padding: 2px; border: 1px solid #ddd; border-radius: 4px;" %>
+  </div>
+
+  <div style="margin-top: 15px;">
+    <%= form.submit "Create Party", style: "background: #007bff; color: white; padding: 15px 20px; border: none; border-radius: 4px; cursor: pointer; margin-right: 2px;" %>
+    <%= link_to "Cancel", parties_path, style: "color: #666; text-decoration: none;" %>
+  </div>
+<% end %>

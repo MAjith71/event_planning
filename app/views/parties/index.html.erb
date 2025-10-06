@@ -1,0 +1,93 @@
+<head>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th {
+      background-color: #bcbcbc;
+    }
+
+    table, th, td {
+      border: 1px solid black;
+      font-size: 16px;
+      text-align: center;
+      padding: 6px;
+    }
+
+    .new_button, .edit_button, .delete_button, .view_button {
+      display: inline-block;
+      padding: 5px 10px;
+      text-decoration: none;
+      color: #fff;
+      border-radius: 3px;
+      font-size: 14px;
+    }
+
+    .new_button {
+      background-color: #007bff;
+    }
+    
+    .view_button {
+      background-color: #007bff;
+    }
+
+    .edit_button {
+      background-color: #17a2b8;
+    }
+
+    .delete_button {
+      background-color: #dc3545;
+    }
+
+    .notice {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+
+<h1>Parties</h1>
+<% if notice %>
+  <p class="notice"><%= notice %></p>
+<% end %>
+<% if @parties.any? %>
+  <%= link_to "Create New Party", new_party_path, class: "new_button" %>
+  <br><br>
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Description</th>
+        <th>Attendees</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @parties.each do |party| %>
+        <tr>
+          <td><%= party.title %></td>
+          <td><%= party.date_time.strftime("%d/%m/%Y") %></td>
+          <td><%= party.date_time.strftime("%I:%M %p") %></td>
+          <td><%= party.description %></td>
+          <td><%= party.attendees.count %></td>
+          <td>
+            <%= link_to "Edit Party", edit_party_path(party), class: "edit_button" %>&nbsp;&nbsp;&nbsp;
+            <%= link_to "Delete Party", party_path(party), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "delete_button" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>
+    No parties yet. <%= link_to "Create your first Party", new_party_path, class: "new_button" %>
+  </p>
+<% end %>
