@@ -1,0 +1,17 @@
+<h1>Attendees of <%= "#{@party.title}" %> </h1>
+<%= form_with(model: @party, style: "max-width: 600px;") do |form| %>
+    <div id="attendees">
+        <%= form.fields_for :attendees do |attendee_form| %>
+            <%= render 'attendee_fields', f: attendee_form %>
+        <% end %>
+        <div class="links">
+            <%= link_to_add_association 'Add Attendee', form, :attendees %>
+        </div>
+    </div>
+    <%= hidden_field_tag :from_page, "attendees" %>
+
+    <div style="margin-top: 15px;">
+        <%= form.submit "Save Attendees", style: "background: #007bff; color: white; padding: 15px 20px; border: none; border-radius: 4px; cursor: pointer; margin-right: 2px;" %>
+        <%= link_to "Cancel", parties_path, style: "color: #666; text-decoration: none;" %>
+    </div>
+<% end %>

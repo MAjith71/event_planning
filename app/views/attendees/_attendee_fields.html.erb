@@ -1,0 +1,12 @@
+<div class="nested-fields" style="margin-bottom: 10px;">
+  <%= f.label :full_name %>
+  <%= f.text_field :full_name, required: true %>
+
+  <%= f.label :email %>
+  <%= f.email_field :email, required: true %>
+
+  <%= f.label :phone %>
+  <%= f.text_field :phone %>
+
+  <%= link_to_remove_association "Remove", f, style: "color: red; margin-left: 10px;" %>
+</div>

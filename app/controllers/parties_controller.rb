@@ -22,7 +22,12 @@ class PartiesController < ApplicationController
     def update
         respond_to do |format|
             if @party.update(party_params)
-                format.html { redirect_to parties_path, notice: "Party was successfully updated." }
+                notice = if params[:from_page] == "attendees"
+                    "Attendees was successfully updated."
+                else
+                    "Party was successfully updated."
+                end
+                format.html { redirect_to parties_path, notice: notice }
             else
                 format.html { render :edit, status: :unprocessable_entity }
             end
@@ -46,6 +51,6 @@ class PartiesController < ApplicationController
     end
 
     def party_params
-      params.require(:party).permit(:id, :title, :description, :date_time)
+      params.require(:party).permit(:id, :title, :description, :date_time, attendees_attributes: [:id, :full_name, :email, :phone, :_destroy])
     end
 end

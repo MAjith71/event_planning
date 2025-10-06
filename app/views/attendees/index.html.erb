@@ -1,0 +1,54 @@
+<head>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+         
+    th {
+      background-color: #bcbcbc;
+    }
+
+    table, th, td {
+      border: 1px solid black;
+      font-size: 16px;
+      text-align: center;
+      padding: 6px;
+    }
+
+    .delete_button {
+      display: inline-block;
+      padding: 5px 10px;
+      text-decoration: none;
+      color: #fff;
+      border-radius: 3px;
+      font-size: 14px;
+      background-color: #dc3545;
+    }
+  </style>
+</head>
+
+<h1>Attendees of <%= "#{@party.title}" %> </h1>
+<%= link_to "Back", parties_path %> <br> <br>
+<% if @attendees.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @attendees.each do |attendee| %>
+        <tr>
+          <td><%= attendee.full_name.capitalize %></td>
+          <td><%= attendee.email %></td>
+          <td><%= attendee.phone %></td>
+          <td><%= link_to "Remove", party_attendee_path(@party, attendee), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "delete_button" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

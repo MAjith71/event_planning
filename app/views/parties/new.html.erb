@@ -22,6 +22,16 @@
     <%= form.text_area :description, rows: 3, style: "width: 300px; padding: 2px; border: 1px solid #ddd; border-radius: 4px;" %>
   </div>
 
+  <h3>Attendees</h3>
+  <div id="attendees">
+    <%= form.fields_for :attendees, @party.attendees.build do |attendee_form| %>
+      <%= render 'attendee_fields', f: attendee_form %>
+    <% end %>
+    <div class="links">
+      <%= link_to_add_association 'Add Attendee', form, :attendees %>
+    </div>
+  </div>
+
   <div style="margin-top: 15px;">
     <%= form.submit "Create Party", style: "background: #007bff; color: white; padding: 15px 20px; border: none; border-radius: 4px; cursor: pointer; margin-right: 2px;" %>
     <%= link_to "Cancel", parties_path, style: "color: #666; text-decoration: none;" %>

@@ -77,7 +77,12 @@
           <td><%= party.date_time.strftime("%d/%m/%Y") %></td>
           <td><%= party.date_time.strftime("%I:%M %p") %></td>
           <td><%= party.description %></td>
-          <td><%= party.attendees.count %></td>
+          <td><%= party.attendees.count %> <br> <br>
+            <% if party.attendees.present?  %>
+              <%= link_to "View Attendees", party_attendees_path(party), class: "view_button" %> &nbsp;&nbsp;&nbsp;
+            <% end %>
+            <%= link_to "Add / Edit Attendees", new_party_attendee_path(party), class: "view_button" %>
+          </td>
           <td>
             <%= link_to "Edit Party", edit_party_path(party), class: "edit_button" %>&nbsp;&nbsp;&nbsp;
             <%= link_to "Delete Party", party_path(party), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "delete_button" %>
